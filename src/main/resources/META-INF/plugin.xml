@@ -1,0 +1,46 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>com.katarhu.gitcommitmessage.git-commit-message</id>
+
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>Git Commit Message</name>
+
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="dev.maksym.huk@gmail.com" url="https://www.yourcompany.com">KatarhuCompany</vendor>
+
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description><![CDATA[
+    <h2>Git commit message plugin</h2>
+
+    <p>This plugin allows to insert commit message.</p>
+  ]]></description>
+
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <projectConfigurable
+            groupId="tools"
+            displayName="Git Commit Message"
+            id="com.katarhu.gitcommitmessage.CommitSettingsConfigurable"
+            instance="com.katarhu.gitcommitmessage.commitmessagesettings.CommitSettingsConfigurable"/>
+    <projectService serviceImplementation="com.katarhu.gitcommitmessage.pluginstate.CommitMessageConfig"/>
+  </extensions>
+
+  <actions>
+      <action
+              text="Apply Commit Message Template"
+              class="com.katarhu.gitcommitmessage.GitCommitAction"
+              id="com.katarhu.gitcommitmessage.GitCommitAction"
+              icon="AllIcons.Actions.EditScheme">
+        <add-to-group group-id="ChangesView.CommitToolbar" anchor="last"/>
+      </action>
+  </actions>
+</idea-plugin>
